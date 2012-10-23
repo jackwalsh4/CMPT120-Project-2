@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+	<!--John (Jack) M. Walsh October 24th, 2012
+		 Project 3 - Maze of Mystery! --> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="author" content="Jack W. Student" />
+		<title>
+			Project 2 - Game Page
+		</title> 
+		<style>
+			body {background-color: silver;}
+			.title {color: green; font-size: xx-large;}
+		</style>
+		<script type = "text/Javascript">
+			//DECLARATION OF VARIABLES
+			var playerName = "";
+			var score = 0;
+			var north1First = false;
+			var south2First = false;
+			var south1First = false;
+			var east1First = false;
+			var west1First = false;
+			var loc = "START";
+			playerName = prompt("What is your name?");
+			//ALERT THE SCORE TO A PLAYER
+			function alertScore() {
+				alert("Your Score is " + score);
+			}
+			//Directional Functions
+			function startingPoint(){
+				loc = "START";
+				updateText("Oh No, You are back where you started!");
+				showBtn("NORTH");
+				showBtn("SOUTH");
+				showBtn("EAST");
+				showBtn("WEST");			
+			}
+			//CALLED WHEN NORTH IS THE DESIRED DIRECTION 
+			function north() {
+			if(loc === "EAST1" || loc === "WEST1" || loc === "NORTH1") {
+					updateText("You cannot go North!");
+				}
+			if(loc === "START"){
+				loc = "NORTH1";
+				if(north1First === false){
+					score += 5;
+				}
+				north1First = true;
+				updateText("You enter a long and narrow passage that leads you to a dead end!");		
+				showBtn("SOUTH");
+				hideBtn("EAST");
+				hideBtn("WEST");
+				hideBtn("NORTH");
+				}
+				//GO TO STARTING POINT
+				else if(loc === "SOUTH1"){
+					startingPoint();
+				}
+				else if(loc === "SOUTH1"){
+					startingPoint();
+				}
+				else if(loc === "SOUTH2"){
+					loc = "SOUTH1"
+					updateText("You are heading North again");
+				}
+			}				
+			function south() {
+				//GO TO SOUTH1
+				if(loc === "SOUTH2" || loc === "WEST1" || loc === "EAST1") {
+					updateText("You cannot go South!");
+				}
+				if(loc === "START"){ 
+					loc = "SOUTH1";
+					if(south1First === false){
+						score += 5;
+					}
+					south1First = true;
+					updateText("As you round a corner, you may either continue forward, or turn back.");
+					hideBtn("EAST");
+					hideBtn("WEST");
+					showBtn("NORTH");
+				}
+				//GO TO SOUTH2
+				else if(loc === "SOUTH1"){
+					loc = "SOUTH2";
+					if(south2First === false){
+						score += 5;
+					}
+					south2First = true;
+					updateText("You stop short in front of a cliff!");
+					hideBtn("SOUTH");
+					hideBtn("WEST");
+					hideBtn("EAST");
+					showBtn("NORTH");
+				}
+				else if(loc === "SOUTH2"){
+					updateText("You cannot go south anymore!");
+				}
+				else if(loc === "NORTH1"){
+					startingPoint();
+				}
+			}
+			function east() {
+				if(loc === "SOUTH1" || loc === "SOUTH2" || loc === "NORTH1" || loc === "EAST1") {
+					updateText("You cannot go East!");
+				}
+				if(loc === "START"){
+					loc = "EAST1";
+					if(east1First === false){
+						score += 5;
+					}
+					east1First = true;
+					updateText("The path continues for miles! Keep going, or turn Back?");
+					showBtn("WEST");
+					hideBtn("SOUTH");
+					hideBtn("NORTH");
+					hideBtn("EAST");
+					
+				}
+				else if(loc === "WEST1"){
+					startingPoint();
+				}
+			}
+			function west() {
+				if(loc === "SOUTH1" || loc === "SOUTH2" || loc === "NORTH1" || loc === "WEST1") {
+					updateText("You cannot go West!");
+				}
+				if(loc === "START"){			
+					loc = "WEST1";
+					if(west1First === false){
+						score += 5;
+					}
+					west1First = true;
+					updateText("Walking West.  Oh no! You have reached a dead end, but there is a treasure chest!" + 
+								" What would you like to do now?");
+					showBtn("EAST");
+					hideBtn("WEST");
+					hideBtn("SOUTH");
+					hideBtn("NORTH");
+				}
+				else if(loc === "EAST1"){
+					startingPoint();
+				}	
+			}
+			//UPDATE THE TEXT IN THE TEXT AREA
+			function updateText(msg) {
+				var wel = document.getElementById("welcome");
+				wel.value = msg;
+			}
+			function readText() {
+               var strInput = "";
+               var userInput = document.getElementById("txtCommand");     
+               strInput = userInput.value.toUpperCase();
+               if (strInput === "N" || strInput === "NORTH"){
+                  north();                
+               }else if (strInput === "E" || strInput === "EAST"){ 
+                  east();
+               }else if (strInput === "S" || strInput === "SOUTH"){
+                  south();
+               }else if (strInput === "W" || strInput === "WEST"){ 
+                  west();                       
+               }else{
+                UpdateText ("Valid commands are \"North\", \"West\", \"East\", or \"South\"");                   
+              }
+            }
+            // CREATES FUNCTION TO HIDE AND SHOW BUTTONS
+        	function hideBtn(btnName){
+				if(btnName === "NORTH")
+					document.getElementById("idNorth").style.visibility="hidden";
+				else if(btnName === "SOUTH")
+					document.getElementById("idSouth").style.visibility="hidden";
+				else if(btnName === "EAST")
+					document.getElementById("idEast").style.visibility="hidden";
+				else if(btnName === "WEST")
+					document.getElementById("idWest").style.visibility="hidden";
+				}
+			function showBtn(btnName){
+				if(btnName === "NORTH")
+					document.getElementById("idNorth").style.visibility="visible";
+				else if(btnName === "SOUTH")
+					document.getElementById("idSouth").style.visibility="visible";
+				else if(btnName === "EAST")
+					document.getElementById("idEast").style.visibility="visible";
+				else if(btnName === "WEST")
+					document.getElementById("idWest").style.visibility="visible";
+				}
+		</script>
+	</head>
+	<body>
+		<p class = "title"> Maze of Mystery!
+		<p>
+			<strong>
+				Click <a href = "mailto:jack.walsh1984@gmail.com">
+				HERE</a> to e-mail me with questions!
+			</strong>
+		</p>
+		<textarea id = "welcome" rows="10" cols="60">Welcome to the Maze of Mystery!  Don't Get Lost!
+		</textarea>
+		<br>
+		<input type = "text"
+			   id = "txtCommand">
+		<br>
+		<input type ="button"
+			   value ="North"
+			   onclick = "north();"
+			   id = "idNorth">
+		<input type ="button"
+			   value ="South"
+			   onclick = "south();"
+			   id = "idSouth">
+		<input type ="button"
+			   value ="East"
+			   onclick = "east();"
+			   id = "idEast">
+		<input type ="button"
+			   value ="West"
+			   onclick = "west();"
+			   id = "idWest">
+		<input type ="button"
+			   value ="Action"
+			   onclick = "readText();">
+		<input type ="button"
+			   value ="Score"
+			   onclick = "alertScore();">
+		<p>	
+		<br>
+		<p class="footer">
+			<a href="http://validator.w3.org/#validate_by_input">Validator</a> 
+		</p>
+	</body> 
+</html>
