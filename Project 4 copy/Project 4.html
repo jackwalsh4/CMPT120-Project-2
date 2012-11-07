@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+	<!--John (Jack) M. Walsh October 24th, 2012
+		 Project 3 - Maze of Mystery! --> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="author" content="Jack W. Student" />
+		<title>
+			Project 2 - Game Page
+		</title> 
+		<style>
+		</style>
+		<script type = "text/Javascript" src = "Project4JavaScript.js">
+		</script>
+		<link rel = "stylesheet" type = "text/css" href = "Project4.css"/>
+	</head>
+	<body onload = "startingPoint()">
+		<p class = "title"> Maze of Mystery!
+		<p>
+			<strong>
+				Click <a href = "mailto:jack.walsh1984@gmail.com">
+				HERE</a> to e-mail me with questions!
+			</strong>
+		</p>
+		<textarea id = "welcome" rows="10" cols="60">
+		</textarea>
+		<br>
+		<input type = "text"
+			   id = "txtCommand">
+		<br>
+		<input type ="button"
+			   value ="North"
+			   onclick = "north();"
+			   id = "idNorth">
+		<input type ="button"
+			   value ="South"
+			   onclick = "south();"
+			   id = "idSouth">
+		<input type ="button"
+			   value ="East"
+			   onclick = "east();"
+			   id = "idEast">
+		<input type ="button"
+			   value ="West"
+			   onclick = "west();"
+			   id = "idWest">
+		<input type ="button"
+			   value ="Action"
+			   onclick = "readText();">
+		<input type ="button"
+			   value ="Score"
+			   onclick = "alertScore();">
+		<input type ="button"
+				value ="Help"
+				onclick = "help();">
+		<input type ="button"
+				value ="Take"
+				onclick = "take();">
+		<p>	
+		<IMG SRC="Map.jpg" width="650" height="500">
+		<br>
+		<p class="footer">
+			<a href="http://validator.w3.org/#validate_by_input">Validator</a> 
+		</p>
+	</body> 
+</html>
